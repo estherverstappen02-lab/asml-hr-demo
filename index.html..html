@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASML | HR Copilot Enterprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ENTERPRISE GRADE STYLING */
+        :root {
+            --asml-navy: #0e1628; /* Corporate Deep Blue */
+            --asml-blue: #2645e0; /* Action Blue */
+            --bg-light: #f4f6fa;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); color: #1e293b; -webkit-font-smoothing: antialiased; }
+
+        /* ASML Spectrum Gradient */
+        .spectrum-line {
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 20%, #ec4899 40%, #f97316 60%, #eab308 80%, #22c55e 100%);
+        }
+
+        /* Navigation Logic */
+        .nav-item { 
+            position: relative; 
+            cursor: pointer; 
+            color: #94a3b8; 
+            transition: all 0.2s ease; 
+            white-space: nowrap; 
+            padding-bottom: 14px; 
+            font-weight: 500;
+            font-size: 0.75rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .nav-item:hover { color: #ffffff; }
+        .nav-item.active { color: #ffffff; border-bottom: 3px solid #3b82f6; }
+
+        /* Typing Animation */
+        .typing-cursor::after {
+            content: '▋';
+            display: inline-block;
+            animation: blink 1s infinite;
+            color: #3b82f6;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked { right: 0; border-color: #10b981; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #10b981; }
+        
+        /* Utility */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .new-comment { animation: slideDown 0.4s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <div class="sticky top-0 z-50 shadow-xl" style="background-color: var(--asml-navy);">
+        <div class="spectrum-line"></div> 
+        
+        <div class="max-w-[1600px] mx-auto px-6 pt-4 pb-0">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center gap-6">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-white tracking-tight leading-none">ASML</span>
+                        <span class="text-[10px] text-gray-400 font-mono tracking-widest mt-1">HR INTELLIGENCE HUB</span>
+                    </div>
+                    <div class="h-8 w-px bg-gray-700"></div>
+                    <div class="flex flex-col">
+                        <span class="text-xs text-blue-200 font-semibold uppercase">Internal Copilot</span>
+                        <span class="text-[10px] text-gray-400">Restricted Access: HRBP Global</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center bg-[#152035] px-3 py-1.5 rounded text-[10px] border border-gray-700">
+                        <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                        <span class="text-gray-300">System Operational</span>
+                    </div>
+                    <div class="text-gray-400 text-xs">V 4.5.2 Pro</div>
+                </div>
+            </div>
+
+            <div class="flex gap-8 overflow-x-auto no-scrollbar mt-4 border-t border-gray-800 pt-4">
+                <div onclick="switchTab('Talent', this)" class="nav-item">Talent Development & Succession</div>
+                <div onclick="switchTab('Recruitment', this)" class="nav-item">Recruitment & Internal Mobility</div>
+                <div onclick="switchTab('Workforce', this)" class="nav-item">Workforce Planning & Cost Management</div>
+                <div onclick="switchTab('Culture', this)" class="nav-item">Culture & Engagement</div>
+                <div onclick="switchTab('Project', this)" class="nav-item">Project & Change Support</div>
+                <div onclick="switchTab('Coaching', this)" class="nav-item">Coaching & Advisory</div>
+                <div onclick="switchTab('Personal', this)" class="nav-item text-blue-400">Personal Productivity</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow p-6 bg-[#f4f6fa]">
+        <div class="max-w-[1600px] mx-auto">
+            
+            <div id="welcomeState" class="flex flex-col items-center justify-center h-[60vh] text-center fade-in">
+                <div class="bg-white p-6 rounded-full shadow-lg mb-6">
+                    <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h1 class="text-3xl font-bold text-slate-800 mb-3">Ready to assist, Partner.</h1>
+                <p class="text-slate-500 max-w-md">Select a functional domain from the navigation bar to access ASML's generative AI models and data repositories.</p>
+            </div>
+
+            <div id="dashboard" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8 fade-in">
+                
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <div class="bg-white rounded border border-gray-200 shadow-sm overflow-hidden">
+                        
+                        <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                            <div>
+                                <h2 id="moduleTitle" class="text-xl font-bold text-slate-800"></h2>
+                                <p class="text-xs text-gray-500 mt-0.5">Powered by Enterprise LLM-4</p>
+                            </div>
+
+                            <div class="flex items-center gap-3 bg-white px-3 py-1.5 rounded border border-gray-200 shadow-sm">
+                                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Privacy Shield</span>
+                                <div class="relative inline-block w-9 h-5 align-middle select-none">
+                                    <input type="checkbox" id="privacyToggle" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-gray-200 appearance-none cursor-pointer transition-all duration-300" onchange="togglePrivacy()"/>
+                                    <label for="privacyToggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-200 cursor-pointer transition-colors duration-300"></label>
+                                </div>
+                                <span id="privacyStatus" class="text-[10px] font-bold text-gray-400 w-6">OFF</span>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            
+                            <div class="mb-6 bg-blue-50/50 rounded p-4 border border-blue-100">
+                                <h3 class="text-xs font-bold text-blue-800 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Top 5 Time-Saving Applications
+                                </h3>
+                                <ul id="tipsList" class="grid grid-cols-1 gap-2 text-sm text-slate-700"></ul>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="relative group">
+                                    <div id="promptBox" class="bg-[#0e1628] text-gray-200 p-5 rounded font-mono text-sm leading-relaxed border border-gray-700 shadow-inner transition-colors duration-500">
+                                        <div class="flex justify-between mb-2 opacity-50 text-[10px] uppercase tracking-widest">
+                                            <span>Input Prompt</span>
+                                            <span>ASML-Secure-Tunnel</span>
+                                        </div>
+                                        <p id="promptText"></p>
+                                    </div>
+                                </div>
+
+                                <div id="outputArea" class="hidden border-l-4 border-blue-500 pl-5 py-2">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Copilot Output</h4>
+                                        <button onclick="simulateExport()" class="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1 btn-action">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                            Export to Teams
+                                        </button>
+                                    </div>
+                                    <div id="aiResponse" class="text-sm text-slate-800 leading-relaxed min-h-[60px]"></div>
+                                    
+                                    <div class="mt-4 pt-3 border-t border-gray-100 flex gap-4 text-[10px] text-gray-400 font-medium uppercase">
+                                        <span>Sources:</span>
+                                        <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Workday</span>
+                                        <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> SharePoint</span>
+                                        <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Compliance DB</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="bg-red-50 border-t border-red-100 p-4 flex items-start gap-4">
+                            <svg class="w-6 h-6 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div>
+                                <h4 class="text-sm font-bold text-red-900 uppercase">Critical Verification Required</h4>
+                                <p class="text-xs text-red-800 mt-1 leading-relaxed">AI can hallucinate. You are responsible for verifying all output against ASML Labor Policy (NL/US) and GDPR regulations before action.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    
+                    <div class="bg-white rounded border border-gray-200 shadow-sm p-6">
+                        <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center">
+                            <span class="bg-green-100 text-green-600 w-6 h-6 rounded flex items-center justify-center mr-2 text-xs">💡</span>
+                            Share Best Practice
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="relative">
+                                <input id="shareInput" type="text" class="w-full bg-slate-50 border border-gray-200 rounded p-3 text-sm focus:ring-2 focus:ring-green-500 outline-none transition" placeholder="Share a prompt...">
+                                <button onclick="postItem('communityList', 'shareInput', 'green')" class="absolute right-2 top-2 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded hover:bg-slate-700">POST</button>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="text-[10px] font-bold text-gray-400 uppercase mb-2">Recent Contributions</h4>
+                                <div id="communityList" class="space-y-3 max-h-[200px] overflow-y-auto pr-2 custom-scroll">
+                                    <div class="bg-green-50/50 p-3 border-l-2 border-green-500 rounded-r text-xs text-slate-600">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-slate-800">Eline (HRBP R&D)</span>
+                                            <span class="text-[10px] text-gray-400">2h ago</span>
+                                        </div>
+                                        "For technical JDs, ask Copilot to 'List 5 key Metrology competencies' first. Huge time saver!"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded border border-gray-200 shadow-sm p-6">
+                        <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 w-6 h-6 rounded flex items-center justify-center mr-2 text-xs">❓</span>
+                            Community Q&A
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="relative">
+                                <input id="qaInput" type="text" class="w-full bg-slate-50 border border-gray-200 rounded p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Ask a question...">
+                                <button onclick="postItem('qaList', 'qaInput', 'blue')" class="absolute right-2 top-2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded hover:bg-blue-700">ASK</button>
+                            </div>
+                            <div class="mt-4">
+                                <h4 class="text-[10px] font-bold text-gray-400 uppercase mb-2">Open Questions</h4>
+                                <div id="qaList" class="space-y-3 max-h-[200px] overflow-y-auto pr-2 custom-scroll">
+                                    <div class="bg-blue-50/50 p-3 border-l-2 border-blue-400 rounded-r text-xs text-slate-600">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-slate-800">Tim (Analytics)</span>
+                                            <span class="text-[10px] text-gray-400">5h ago</span>
+                                        </div>
+                                        "How to anonymize data for R&D attrition analysis properly?"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-800 text-white px-6 py-3 rounded shadow-xl transform translate-y-20 transition-transform duration-300 flex items-center gap-3">
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span class="text-sm font-medium">Exported to MS Teams successfully</span>
+    </div>
+
+    <script>
+        const contentData = {
+            'Talent': {
+                title: 'Talent Development & Succession',
+                tips: ["Map niche engineering skills to 'Dual Career Ladder'.", "Compare team capabilities vs. EUV roadmap.", "Summarize 360-feedback into SWOT.", "Generate learning paths from internal catalog.", "Simulate succession risk scenarios."],
+                prompt: 'Analyze the skills profile of Engineer A. Compare with the Senior Architect profile. Identify top 3 gaps and suggest training.',
+                safePrompt: 'Analyze skills profile [User_ID_55]. Compare with [Role_Profile_Arch]. Identify gaps without PII.',
+                outcome: "Based on the comparison, the candidate matches 85% of the Architect profile. Key gaps identified: 1) Advanced Lithography Physics, 2) Stakeholder Management. \n\nSuggested Intervention: Enroll in 'Tech Leadership Program Q3' and assign mentor [ID_99]."
+            },
+            'Recruitment': {
+                title: 'Recruitment & Internal Mobility',
+                tips: ["Rewrite technical JDs for inclusivity.", "Keyword match for 'Metrology', 'Lithography'.", "Generate FAQs for 30% ruling.", "Create Boolean search strings.", "Match R&D projects with internal talent."],
+                prompt: 'Rewrite this Mechatronics Engineer job description to be gender-neutral.',
+                safePrompt: 'Rewrite [Job_Text_Block] to be gender-neutral. Remove contact names.',
+                outcome: "Revised JD Summary: 'We are looking for a collaborative problem-solver to join our Mechatronics team.' \n\nChanges made: Removed gender-coded words ('Dominant', 'Ninja'). Added emphasis on team growth and inclusive benefits package."
+            },
+            'Workforce': {
+                title: 'Workforce Planning & Cost',
+                tips: ["Model factory shift patterns (Veldhoven).", "Visualize hiring freeze impacts.", "Compare Contractor vs FTE costs.", "Predict attrition peaks in R&D.", "Analyze manager ratios."],
+                prompt: 'Analyze attrition in R&D. Predict headcount needs for next quarter.',
+                safePrompt: 'Analyze aggregated attrition for [Dept_RD]. Predict capacity needs.',
+                outcome: "Analysis complete. R&D attrition is trending at 4.2% (Annualized). \n\nPrediction: To meet the 'High-NA' project milestones in Q3, you need to open 12 new FTE positions by next month to offset predicted outflow."
+            },
+            'Culture': {
+                title: 'Culture & Engagement',
+                tips: ["Analyze 'Speak Up' survey comments.", "Identify work pressure risks.", "Review communications for sensitivity.", "Connect values to behaviors.", "Generate expat guides."],
+                prompt: 'Summarize 500 survey comments. Top 3 friction points on workload?',
+                safePrompt: 'Summarize [Dataset_Survey_Clean]. Identify top 3 themes.',
+                outcome: "Top 3 Themes identified from 500 comments:\n1. Meeting Overload (Mentioned 45%): 'Too many alignments, too little focus time'.\n2. Tooling Latency (20%): Legacy systems slowing down engineering.\n3. Cross-timezone fatigue (15%)."
+            },
+            'Project': {
+                title: 'Project & Change Support',
+                tips: ["Map stakeholders for SAP rollout.", "Draft timeline for reorg.", "Predict Townhall questions.", "Identify resistance pockets.", "Compare As-Is vs To-Be."],
+                prompt: 'Create stakeholder analysis for HRIS rollout. Identify resistors in Ops.',
+                safePrompt: 'Create stakeholder matrix for [Project_X] based on Roles.',
+                outcome: "Stakeholder Matrix Generated:\n- Plant Managers (High Influence/High Impact): Potential Resistance due to disruption of shifts.\n- Team Leads: Neutral.\n\nRecommended Action: Schedule early-access demo for Plant Managers to address concerns."
+            },
+            'Coaching': {
+                title: 'Coaching & Advisory',
+                tips: ["Simulate difficult conversations.", "Lookup Labor Law implications.", "Draft constructive improvement plans.", "Explain bonus structures.", "Mediation scripts."],
+                prompt: 'Draft script for missed deadline conversation. Keep it constructive.',
+                safePrompt: 'Draft script for performance feedback (Type: Deadline). Focus on facts.',
+                outcome: "Script Draft:\n'I noticed the milestone for Project X was missed last Friday. I want to understand the blockers you faced. Was it a capacity issue or a dependency issue? Let's make a plan to get back on track by Tuesday.'"
+            },
+            'Personal': {
+                title: 'Personal Productivity',
+                tips: ["Summarize Teams transcripts.", "Draft responses to inquiries.", "Search employee handbook.", "Generate HR data formulas.", "Structure strategy decks."],
+                prompt: 'Summarize email thread about budget. List action items.',
+                safePrompt: 'Summarize [Budget_Thread]. Extract generic action items.',
+                outcome: "Summary:\nFinance has approved the revised Q2 budget. \n\nAction Items:\n1. Submit final headcount request by Friday.\n2. Notify hiring managers of unblocked positions.\n3. Update cost center allocation in Workday."
+            }
+        };
+
+        let currentId = null;
+        let isPrivacyOn = false;
+
+        function switchTab(id, el) {
+            currentId = id;
+            
+            // UI Updates
+            document.getElementById('welcomeState').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+
+            // Load Data
+            const data = contentData[id];
+            document.getElementById('moduleTitle').innerText = data.title;
+            
+            // Render Tips
+            const tipsList = document.getElementById('tipsList');
+            tipsList.innerHTML = '';
+            data.tips.forEach(tip => {
+                const li = document.createElement('li');
+                li.className = "flex items-start gap-2";
+                li.innerHTML = `<span class="text-blue-500 font-bold">✓</span> ${tip}`;
+                tipsList.appendChild(li);
+            });
+
+            updatePrompt();
+            
+            // Reset Output
+            document.getElementById('outputArea').classList.add('hidden');
+            document.getElementById('aiResponse').innerHTML = '';
+        }
+
+        function togglePrivacy() {
+            isPrivacyOn = document.getElementById('privacyToggle').checked;
+            const status = document.getElementById('privacyStatus');
+            const box = document.getElementById('promptBox');
+            const badge = document.querySelector('#promptBox span:first-child');
+
+            if(isPrivacyOn) {
+                status.innerText = "ON";
+                status.classList.replace('text-gray-400', 'text-green-500');
+                box.classList.replace('bg-[#0e1628]', 'bg-[#064e3b]'); 
+                badge.innerText = "SECURE MODE ACTIVE";
+                badge.classList.add('text-green-400');
+            } else {
+                status.innerText = "OFF";
+                status.classList.replace('text-green-500', 'text-gray-400');
+                box.classList.replace('bg-[#064e3b]', 'bg-[#0e1628]');
+                badge.innerText = "INPUT PROMPT";
+                badge.classList.remove('text-green-400');
+            }
+            updatePrompt();
+        }
+
+        function updatePrompt() {
+            if(!currentId) return;
+            const text = isPrivacyOn ? contentData[currentId].safePrompt : contentData[currentId].prompt;
+            
+            const el = document.getElementById('promptText');
+            el.innerHTML = '';
+            let i = 0;
+            const speed = 10; 
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    setTimeout(generateResponse, 500);
+                }
+            }
+            typeWriter();
+        }
+
+        function generateResponse() {
+            const outputArea = document.getElementById('outputArea');
+            const aiResponse = document.getElementById('aiResponse');
+            
+            outputArea.classList.remove('hidden');
+            aiResponse.innerHTML = '<span class="text-blue-600 animate-pulse font-mono text-xs">Generating insight...</span>';
+            
+            setTimeout(() => {
+                const responseText = contentData[currentId].outcome;
+                aiResponse.className = "text-sm text-slate-800 leading-relaxed whitespace-pre-line typing-cursor";
+                aiResponse.innerHTML = "";
+                
+                let i = 0;
+                function typeOutput() {
+                    if (i < responseText.length) {
+                        aiResponse.innerHTML += responseText.charAt(i);
+                        i++;
+                        setTimeout(typeOutput, 5); 
+                    } else {
+                         aiResponse.classList.remove('typing-cursor');
+                    }
+                }
+                typeOutput();
+            }, 1000);
+        }
+
+        function postItem(listId, inputId, color) {
+            const input = document.getElementById(inputId);
+            if(!input.value) return;
+            
+            const list = document.getElementById(listId);
+            const item = document.createElement('div');
+            
+            const borderClass = color === 'green' ? 'border-green-500' : 'border-blue-400';
+            const bgClass = color === 'green' ? 'bg-green-50/50' : 'bg-blue-50/50';
+            
+            item.className = `${bgClass} p-3 border-l-2 ${borderClass} rounded-r text-xs text-slate-600 new-comment`;
+            item.innerHTML = `
+                <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-slate-800">You (Just now)</span>
+                </div>
+                "${input.value}"
+            `;
+            list.prepend(item);
+            input.value = '';
+        }
+
+        function simulateExport() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
